@@ -25,7 +25,6 @@ GLuint Sprite::compileShader(GLenum type, const char* source)
 void Sprite::createShader(const std::string& vertexFile, const std::string& fragmentFile) {
     std::string vertexSrc, fragmentSrc;
 
-    // Shaders por defecto
     const char* fallbackVertex = R"(
         #version 330 core
         layout(location = 0) in vec2 position;
@@ -47,7 +46,6 @@ void Sprite::createShader(const std::string& vertexFile, const std::string& frag
             color = fragColor;
         })";
 
-    // Intentamos abrir los archivos
     std::ifstream vertFile(vertexFile);
     std::ifstream fragFile(fragmentFile);
 
@@ -65,7 +63,6 @@ void Sprite::createShader(const std::string& vertexFile, const std::string& frag
         fragmentSrc = fallbackFragment;
     }
 
-    // Compilamos y linkeamos
     GLuint vert = compileShader(GL_VERTEX_SHADER, vertexSrc.c_str());
     GLuint frag = compileShader(GL_FRAGMENT_SHADER, fragmentSrc.c_str());
 
@@ -110,12 +107,14 @@ void Sprite::init(float x, float y, int width, int height)
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    createShader("Shaders/spriteVertexShader.glsl", "Shaders/spriteFragmentShader.glsl");
+    shaders.compileShaders("Shaders/spriteVertexShader.glsl", "Shaders/spriteFragmentShader.glsl");
+    //createShader("Shaders/spriteVertexShader.glsl", "Shaders/spriteFragmentShader.glsl");
 }
 
 void Sprite::draw()
 {
-    glUseProgram(shaderProgram);
+    //glUseProgram(shaderProgram);
+    shaders.use();
     glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
     glEnableVertexAttribArray(0);
@@ -128,5 +127,6 @@ void Sprite::draw()
 
     glDisableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glUseProgram(0);
+    shaders.unuse();
+    //glUseProgram(0);
 }

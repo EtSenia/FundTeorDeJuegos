@@ -139,12 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Error.cpp" />
+    <ClCompile Include="GLSProgram.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MiMotor.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Error.h" />
+    <ClInclude Include="GLSProgram.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Vertex.h" />

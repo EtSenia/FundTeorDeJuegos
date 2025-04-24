@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <string>
+#include "GLSProgram.h"
 
 class Sprite
 {
@@ -8,6 +9,7 @@ class Sprite
 	int width, height;
 	GLuint vboID;
 	GLuint shaderProgram;
+	GLSProgram shaders;
 
 	GLuint compileShader(GLenum type, const char* source);
 	void createShader(const std::string& vertexFile, const std::string& fragmentFile);
